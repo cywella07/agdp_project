@@ -8,7 +8,7 @@ use Mediconesystems\LivewireDatatables\Column;
 use Mediconesystems\LivewireDatatables\Http\Livewire\LivewireDatatable;
 use Illuminate\Support\Facades\Validator;
 use App\Models\UserPost;
-
+use Illuminate\Support\Carbon;
 class UserPostDataTable extends LivewireDatatable
 {
     
@@ -26,6 +26,10 @@ class UserPostDataTable extends LivewireDatatable
         return [
             Column::name('title')->label('Title'),
             Column::name('description')->label('Description'),
+            Column::name('updated_at')
+            ->callback('updated_at', function ($value) {
+                return Carbon::parse($value)->format('m/d/Y');
+            })->label('Date'),
             Column::callback(['id'], function ($id) {
             
                 $link = url('/posts');
