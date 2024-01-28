@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\UserPost;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Carbon; 
 
 class UserPostController extends Controller
 {
@@ -36,6 +37,7 @@ class UserPostController extends Controller
         
             $update_data->title = $request->title;
             $update_data->description = $request->description;
+            $update_data->updated_at =Carbon::now();
             $update_data->save();
         
             return redirect()->back()->with('success', 'User post update successfully in the database.');
